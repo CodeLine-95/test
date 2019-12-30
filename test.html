@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style type="text/css">
+			html .layui-layer-demo {
+			    background-color: #eee;
+			}
+			.layui-layer-demo .layui-layer-title {
+			    border: none;
+			    background-color: #333;
+			    color: #fff;
+			}
+		</style>
+		<script src="https://code.jquery.com/jquery-3.4.1.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="http://res.layui.com/layui/release/layer/dist/layer.js?v=3111" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<button type="button" id="demo">自定义</button>
+		<script type="text/javascript">
+			
+			$('#demo').click(function(){
+				layer.open({
+				  type: 1,
+				  skin: 'layui-layer-demo', //样式类名
+				  closeBtn: 1, //不显示关闭按钮
+				  anim: 2,
+				  shadeClose: true, //开启遮罩关闭
+				  content: '<div style="padding:20px;">即传入skin:"样式名"，然后你就可以为所欲为了。<br>你怎么样给她整容都行<br><br><br>我是华丽的酱油==。</div>'
+				});
+			})
+			
+			
+			var Id = '5213513360866613944'
+			$.post('http://testmeetinguser.api.huiyiguanjia.com/custom/custom9/UpdateAnswerTime', {meetinguserId:Id,questionNumber: "1"}, function(str){
+			    console.log(JSON.stringify(str))
+			});
+		</script>
+	</body>
+</html>

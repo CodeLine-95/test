@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>人脸识别</title>
+		<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+		<script src="js/jquery.facedetection.min.js" type="text/javascript" charset="utf-8"></script>
+		<style type="text/css">
+			.face-img{
+			    position: absolute;
+			    border: 3px solid #fff;
+			    border-radius: 4px;
+			    box-shadow: 5px 5px 10px rgba(0,0,0,0.4);
+			}
+			.portraits {
+			    position: absolute;
+			    margin-top: -30px;
+			    width: 100%;
+			    left: 50%;
+			    text-align: center;
+			    z-index: 1;
+			    -webkit-transform: translate(-50%, 0);
+			    transform: translate(-50%, 0);
+			}
+			
+			.portrait {
+			    display: inline-block;
+			    width: 95px;
+			    height: 95px;
+			    margin: 0 2%;
+			    border-radius: 100px;
+			    border: 3px solid white;
+			    box-shadow: 10px 10px 40px rgba(0,0,0,0.5);
+			    cursor: pointer;
+			    -webkit-filter: sepia(40%);
+			    filter: sepia(40%);
+			}
+			.swing {
+			    -webkit-transform-origin: top center;
+			    transform-origin: top center;
+			    -webkit-animation-name: swing;
+			    animation-name: swing;
+			}
+			.animated {
+			    -webkit-animation-duration: 1s;
+			    animation-duration: 1s;
+			    -webkit-animation-fill-mode: both;
+			    animation-fill-mode: both;
+			}
+		</style>
+	</head>
+	<body>
+		<div>
+			<img id="img" src="img/9c47339ecaac2e5df525340dacf4825e.jpg"/>
+		</div>
+		<div id="portraits" class="portraits">
+			
+		</div>
+		<script type="text/javascript">
+			$(function () {
+			    $('#img').faceDetection({
+			        complete: function (faces) {
+			            if (faces.length == 0) { //说明没有检测到人脸
+			                console.log('无人脸')
+			            } else {
+							var marg = 10;
+							console.log(faces)
+			                for (var i=0; i< faces.length; i++) {
+			                    var left   = (faces[i].x - marg),
+									top    = (faces[i].y - marg*3),
+									width  = (faces[i].width  + (marg * 5)),
+									height = (faces[i].height + (marg * 5));
+									
+								$('<div />', {
+									'class': 'face-img',
+									'css': {
+										'left':   left   * faces[i].scaleX + 'px',
+										'top':    top    * faces[i].scaleY + 'px',
+										'width':  width  * faces[i].scaleX + 'px',
+										'height': height * faces[i].scaleY + 'px'
+									}
+								})
+								.appendTo($('#img').closest('div'));
+			                }
+			            }
+			        },
+			        error: function (code, message) {
+			            console.log(code,message)
+			        }
+			    })
+			})
+		</script>
+	</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script src="https://code.jquery.com/jquery-3.4.1.min.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			$(function(){
+				var crr = [];
+				var arr = [1, 25, 56, 56, 89, 96, 36, 75, 25];
+				$.each(arr,function(index,value){
+					if(crr.indexOf(value) === -1 && repeatCount(value,arr) <= 1){
+						crr.push(value)
+					}
+				});
+				console.log(crr)
+			})
+			
+			//获取重复元素在数组中的个数
+			function repeatCount(value,arr){
+				var num=0;
+				for(var index=0;index<arr.length;index++){
+				  if(arr[index]== value){
+				    num=num+1;
+				  }
+				}
+				return num;
+			}
+		</script>
+	</body>
+</html>
